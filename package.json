@@ -18,5 +18,11 @@
   "bugs": {
     "url": "https://github.com/y-takey/react-heat-calendar/issues"
   },
-  "homepage": "https://github.com/y-takey/react-heat-calendar#readme"
+  "homepage": "https://github.com/y-takey/react-heat-calendar#readme",
+  "dependencies": {
+    "lodash.countby": "^4.6.0",
+    "lodash.sortby": "^4.7.0",
+    "moment": "^2.17.1",
+    "react": "^15.4.2"
+  }
 }
