@@ -8,9 +8,9 @@ module.exports = {
 
   output: {
     path: path.join(__dirname),
-    filename: 'react-heat-calendar.js',
+    filename: 'index.js',
     libraryTarget: 'umd',
-    library: 'ReactHeatCalendar'
+    library: 'HeatCalendar'
   },
 
   externals: {
