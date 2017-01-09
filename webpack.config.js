@@ -45,12 +45,7 @@ if (nodeEnv === 'development') {
   webpackConfig.output.publicPath = '/';
 }
 
-if (nodeEnv === 'demo') {
-  webpackConfig.entry['react-heat-calendar'].push(path.resolve(__dirname, 'demo', 'demo.jsx'));
-  webpackConfig.output.path = path.resolve(__dirname, 'demo');
-}
-
-if (nodeEnv === 'development' || nodeEnv === 'demo') {
+if (nodeEnv === 'development') {
   webpackConfig.plugins.push(new webpack.DefinePlugin({
     'COMPONENT_NAME': JSON.stringify(pak.name),
     'COMPONENT_VERSION': JSON.stringify(pak.version),
