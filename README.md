@@ -1,22 +1,34 @@
-# react heat calendar
+# React Heat Calendar
 
-Get the AMD module located at `react-heat-calendar.js` and include it in your project.
+Like a Github's contribution calendar.
 
-Here is a sample integration:
+## Installation
 
-```js
-require.config({
-  paths: {
-    'react': 'vendor/bower_components/react/react',
-    'ReactHeatCalendar': 'react-heat-calendar'
-  }
-});
+Install the npm module:
 
-require(['react', 'ReactHeatCalendar'], function(React, ReactHeatCalendar) {
+```bash
+yarn add react-heat-calendar
+# Or
+npm install react-heat-calendar
+```
 
-  React.render(React.createElement(ReactHeatCalendar), document.getElementById('widget-container'));
+## Usage
 
-});
+Import the component:
+
+```javascript
+import HeatCalendar from 'react-heat-calendar';
+
+<HeatCalendar
+  beginDate={new Date('2016-12-01')}
+  endDate={new Date('2017-01-31')}
+  data={[
+    { date: '2016-12-02', someAttr: "foo" },
+    { date: '2016-12-03', someAttr: "bar" },
+    { date: '2016-12-03', someAttr: "baz" },
+    // ...and so on
+  ]}
+/>
 ```
 
 ## Development
