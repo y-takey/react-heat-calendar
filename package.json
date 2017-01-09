@@ -1,6 +1,6 @@
 {
   "name": "react-heat-calendar",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "react heat calendar, which is like a Github's contribution calendar",
   "main": "./build/index.js",
   "scripts": {
