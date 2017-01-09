@@ -37,4 +37,5 @@ jspm_packages
 .node_repl_history
 
 bower_components
+build
 .DS_Store

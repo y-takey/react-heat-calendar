@@ -1,5 +1,3 @@
-"use strict";
-
 const moment = require("moment");
 
 import { DATE_FORMAT, initArray } from "./utils";

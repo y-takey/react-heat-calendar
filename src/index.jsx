@@ -1,4 +1,3 @@
-"use strict";
 const React = require("react");
 const moment = require("moment");
 const countBy = require("lodash.countby");
@@ -38,7 +37,7 @@ const STYLES = {
   }
 }
 
-export default class HeatCalendar extends React.Component {
+class HeatCalendar extends React.Component {
   calendar() {
     let { beginDate, endDate } = this.props;
     const data = this.generateData();
@@ -122,3 +121,5 @@ export default class HeatCalendar extends React.Component {
     </div>
   }
 }
+
+export default HeatCalendar;

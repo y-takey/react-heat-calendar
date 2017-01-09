@@ -1,40 +1,77 @@
-/* jshint node: true */
-var path = require('path');
+const webpack = require('webpack');
+const path = require('path');
+const pak = require('./package.json');
+const nodeEnv = process.env.NODE_ENV || 'development';
 
-
-module.exports = {
-  context: path.join(__dirname),
-  entry: './lib/index.js',
-
+const webpackConfig = {
+  context: __dirname,
+  entry: {
+    'react-heat-calendar': [
+      path.resolve(__dirname, 'src', 'index.jsx')
+    ]
+  },
   output: {
-    path: path.join(__dirname),
+    path: path.resolve(__dirname),
     filename: 'index.js',
-    libraryTarget: 'umd',
-    library: 'HeatCalendar'
+    library: 'HeatCalendar',
+    libraryTarget: 'umd'
   },
-
-  externals: {
-   'react': 'var React',
-   'react/addons': 'var React'
+  resolve: {
+    extensions: ['', '.js', '.jsx'],
+    modulesDirectories: ['node_modules']
   },
-
   module: {
     loaders: [
       {
-        test: /\.scss$/,
-        // Query parameters are passed to node-sass
-        loader: 'style!css!sass?outputStyle=expanded&' +
-          'includePaths[]=' + (path.resolve(__dirname, './node_modules'))
-      },
-      {
-        test: /(\.js)|(\.jsx)$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader',
-        query: {
-          optional: ['runtime'],
-          stage: 0
-        }
+        test: /\.jsx?$/,
+        exclude: /(node_modules)/,
+        loader: 'babel'
       }
     ]
-  }
+  },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(nodeEnv)
+    })
+  ]
 };
+
+if (nodeEnv === 'development') {
+  webpackConfig.devtool = 'source-map';
+  webpackConfig.debug = true;
+  webpackConfig.devServer = { contentBase: './demo'};
+  webpackConfig.entry['react-heat-calendar'].unshift('webpack-dev-server/client?http://0.0.0.0:8080/');
+  webpackConfig.entry['react-heat-calendar'].push(path.resolve(__dirname, 'demo', 'demo.jsx'));
+  webpackConfig.output.publicPath = '/';
+}
+
+if (nodeEnv === 'demo') {
+  webpackConfig.entry['react-heat-calendar'].push(path.resolve(__dirname, 'demo', 'demo.jsx'));
+  webpackConfig.output.path = path.resolve(__dirname, 'demo');
+}
+
+if (nodeEnv === 'development' || nodeEnv === 'demo') {
+  webpackConfig.plugins.push(new webpack.DefinePlugin({
+    'COMPONENT_NAME': JSON.stringify(pak.name),
+    'COMPONENT_VERSION': JSON.stringify(pak.version),
+    'COMPONENT_DESCRIPTION': JSON.stringify(pak.description)
+  }));
+}
+
+if (nodeEnv === 'production') {
+  webpackConfig.externals = {
+    'react': {
+      root: 'React',
+      commonjs2: 'react',
+      commonjs: 'react',
+      amd: 'react'
+    }
+  };
+  webpackConfig.output.path = path.resolve(__dirname, 'build');
+  webpackConfig.plugins.push(new webpack.optimize.UglifyJsPlugin({
+    compress: { warnings: false },
+    sourceMap: false
+  }));
+}
+
+module.exports = webpackConfig;
