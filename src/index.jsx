@@ -52,8 +52,9 @@ class HeatCalendar extends React.Component {
   }
 
   generateData() {
+    const field = this.props.dateField || "date";
     const countByDays = countBy(this.props.data, (item) => {
-      return moment(item.date).format(DATE_FORMAT);
+      return moment(item[field]).format(DATE_FORMAT);
     });
 
     const maxCount = Math.max(...Object.values(countByDays))
