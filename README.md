@@ -20,8 +20,9 @@ Import the component:
 import HeatCalendar from 'react-heat-calendar';
 
 <HeatCalendar
-  beginDate={new Date('2016-12-01')}
-  endDate={new Date('2017-01-31')}
+  beginDate={new Date('2016-12-01')} // optional
+  endDate={new Date('2017-01-31')}   // optional
+  dateField="date"                   // optional
   data={[
     { date: '2016-12-02', someAttr: "foo" },
     { date: '2016-12-03', someAttr: "bar" },
@@ -30,6 +31,15 @@ import HeatCalendar from 'react-heat-calendar';
   ]}
 />
 ```
+
+#### Defaults
+
+| property  | value |
+|-----------|-------|
+| beginDate | start date of minimum month in the data |
+| endDate   | end date of maximum month in the data |
+| dateField | "date" |
+
 
 ## Development
 
